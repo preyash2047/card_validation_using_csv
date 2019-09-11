@@ -1,3 +1,4 @@
+Mathematics behind Credit/Debit card numbering
 
 All credit and debit cards have numbers printed on them (generally 16 digits). This signifies a unique account number for a card and reveals some information about the card issuer and its associated account. For obvious reasons, just any randomly generated numbers will not work, they follow pattern.
 
