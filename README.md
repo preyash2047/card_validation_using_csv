@@ -1,4 +1,4 @@
-# card_validator
+# Program Explanation 
 Python based program to validate Debit/Credit Card on the basis of Number Mechanism and provide the details Major Industry Identifier and Issuer Identification Number.
 
 ##-*- coding: utf-8 -*-
