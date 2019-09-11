@@ -1,0 +1,41 @@
+start,end,name,c_d,number_length
+222100,272099,MasterCard,Credit / Debite,16
+300000,305999,Diners Club International,Credit,14
+308800,309499,JCB,Credit,16
+309500,309599,Diners Club International,Credit,14
+309600,310299,JCB,Credit,16
+311200,312099,JCB,Credit,16
+315800,315999,JCB,Credit,16
+333700,334999,JCB,Credit,16
+340000,349999,American Express,Credit / Debite,15
+352800,358999,JCB,Credit,16
+360000,369999,Diners Club International,Credit,14
+370000,379999,American Express,Credit / Debite,15
+380000,399999,Diners Club International,Credit,14
+400000,499999,Visa,Credit / Debite,"13,16,19"
+500000,509999,Maestro,Credit / Debite,"12,13,14,15,16,17,18,19"
+510000,559999,MasterCard,Credit / Debite,16
+560000,699999,Maestro,Credit / Debite,"12,13,14,15,16,17,18,19"
+601100,601103,Discover,Credit / Debite,"16,19"
+601104,601104,PayPal,Credit,"14,15,16,17,18,19"
+601105,601109,Discover,Credit / Debite,"16,19"
+601120,601149,Discover,Credit / Debite,"16,19"
+601174,601174,Discover,Credit / Debite,"16,19"
+601177,601179,Discover,Credit / Debite,"16,19"
+601186,601199,Discover,Credit / Debite,"16,19"
+607000,607999,RuPay,Credit / Debite,16
+620000,629999,China Union Pay,Credit / Debite,"16,17,18,19"
+621094,621094,UnionPayc,Don’t know,"14,15,16,17,18,19"
+622126,622925,Discover,Credit / Debite,"16,19"
+622126,622925,UnionPayd,Credit / Debite,"14,15,16,17,18,19"
+624000,626999,UnionPayd,Credit,"14,15,16,17,18,19"
+628200,628899,UnionPayd,Credit,"14,15,16,17,18,19"
+644000,650599,Discover,Credit / Debite,"16,19"
+650600,650600,PayPal,Credit,"14,15,16,17,18,19"
+650601,650609,Discover,Credit / Debite,"16,19"
+650610,650610,PayPal,Credit,"14,15,16,17,18,19"
+650611,659999,Discover,Credit / Debite,"16,19"
+811000,813199,UnionPayd,Debit,"14,15,16,17,18,19"
+813200,815199,UnionPayd,Credit,"14,15,16,17,18,19"
+815200,816399,UnionPayd,Debit,"14,15,16,17,18,19"
+816400,817199,UnionPayd,Credit,"14,15,16,17,18,19"
