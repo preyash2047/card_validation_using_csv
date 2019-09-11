@@ -1,136 +1,57 @@
-# Program Explanation 
-Python based program to validate Debit/Credit Card on the basis of Number Mechanism and provide the details Major Industry Identifier and Issuer Identification Number.
 
-##-*- coding: utf-8 -*-
-"""
-Created on Tue Sep 10 20:55:30 2019
-@author: Preyash2047@gmail.com
-"""
+All credit and debit cards have numbers printed on them (generally 16 digits). This signifies a unique account number for a card and reveals some information about the card issuer and its associated account. For obvious reasons, just any randomly generated numbers will not work, they follow pattern.
 
-#statement to import csv Moule and numpy module
-import csv
-import numpy as np
+Let’s break it down
+1. Card Number
+Credit/Debit card numbers are all numeric. These numbers count ranges from 12 to 19 digits.
+For example, MasterCard has 16 digits and American Express has 15 digits.
+2. Major Industry Identifier (MII)
+The first digit of the credit/debit card is the Major Industry Identifier (MII). It indicates the category of the entity which issued the card.
+* 1 and 2: Airlines
+* 3: Travel and Entertainment
+* 4 and 5: Banking and Financial Services
+* 6: Merchandising and Banking
+* 7: Petroleum
+* 8: Health care, Telecommunications
+* 9: National Assignment
+3. Issuer Identification Number (IIN)
+The first six digits are the Issuer Identification Number (IIN). These denotes the institution that issued the card.
+For example, Visa cards begin with a 4, while MasterCard ones start with number between 51 and 55.
 
-#csv file imported and stored in reader
-reader = csv.DictReader(open("card_data.csv"))
+3. Issuer Identification Number (IIN)
+The first six digits are the Issuer Identification Number (IIN). These denotes the institution that issued the card.
+For example, Visa cards begin with a 4, while MasterCard ones start with number between 51 and 55.
+The Mathematics behind the Card Numbering
+In a typical sixteen-digit credit card number, the first fifteen digits are determined by the issuing bank, but the last digit, called the check digit, is mathematically determined based on all other digits.
+5333619503715702
+Account Number: 533361950371570
+Check Digit: 2
+Credit/Debit card numbers are often typed in, input, transferred and quoted. All of this transmission can cause errors, especially considering that humans are involved. Humans often make mistakes in transferal. To try and minimize this, credit card numbers contain a check digit.
+Although, not all errors can be detected with a single check digit, one can still find out if one digit is wrong. Whenever an e-commerce application, for example, has to validate a card number, it checks this last digit before sending the rest of the information to the bank.
+The exact mathematic formula for its generation was invented by Hans Peter Luhn, an engineer at IBM in 1954. Originally patented, the algorithm is now in the public domain and a Worldwide standard ISO/IEC 7812–1.
+The Luhn Algorithm or modulo-10 Algorithm
+The Luhn algorithm is based around the principle of modulo arithmetic and digital roots.
+1. Start from the rightmost digit (i.e. check digit)
+2. Multiply every second digit by 2 (i.e. digit at even positions)
+3. If the result in step 2 is more than one digit, add them up (E.g. 12: 1+2 = 3)
+4. Add the resulting digits to digits at the odd positions
+Let’s consider below account number for example.
+Note: Number generated randomly from online website.
+533361950371570
 
-#input card number
-card_number = input("Enter the card No: ")
+Example for calculating check digit for any Credit/Debit card
+https://miro.medium.com/max/972/1*VwP_mnBs0D7XTbC-rS9R3A.png
+The total obtained is 48+x, should be divisible by 10, only then this number is a valid card number.
+Thus, the check digit (x) should be calculated accordingly, so that the final total is divisible by 10.
+Therefore, x must be 2, so that the total will be 48+2 = 50. (“x” can only be a single digit)
+x = 2 is the check digit for the above example.
+You can go ahead and try with your own Credit/Debit card numbers.
 
-#global variable declaration
-min_digits=0
-max_digits=0
-card_number_list = list(card_number)
-card_number_list_reverse=card_number_list[::-1]
-card_number_length=len(card_number_list)
-first_digit = int(card_number_list[0])
 
-#global variable for final output
-card_provider_list_number = 0
-result_found = False
-card_number_digits = 0
-mit_name=""
 
-#list declaration
-start=[]
-end=[]
-name=[]
-c_d=[]
-number_length=[]
-min_max_digits_list=[]
+References: 
+    - https://medium.com/@ma.juber/mathematics-behind-credit-debit-card-numbering-340bf68d27d2
+    - https://www.discoverglobalnetwork.com/downloads/IPP_VAR_Compliance.pdf
 
-#append the list from csv file
-for raw in reader:
-    start.append(raw['start'])
-    end.append(raw['end'])
-    name.append(raw['name'])
-    c_d.append(raw['c_d'])
-    number_length.append(raw['number_length'])
 
-#initialize the value of min_digits & max_digits
-def min_max_digits():
-    global min_digits
-    global max_digits
-    for i in range(len(start)):
-        available_length=number_length[i].split(',')
-        for j in range(len(available_length)):
-            min_max_digits_list.append(available_length[j])
-    min_max_digits_array = np.array(min_max_digits_list) 
-    np.unique(min_max_digits_array)
-    min_digits=int(min(min_max_digits_array))
-    max_digits=int(max(min_max_digits_array))
 
-#convert list value to int
-def list_to_int(noofdigits): 
-    str1 = ""
-    return int(str1.join(noofdigits))
-
-#card validation of Issuer Identification Number
-def iin_identifier():
-    first_six_digit = list_to_int(card_number_list[0:6])
-    for i in range(len(start)):
-        if(first_six_digit >= int(start[i]) and first_six_digit <= int(end[i])):
-            available_length=number_length[i].split(',')
-            for j in range(len(available_length)):
-                if(card_number_length == int(available_length[j])):
-                    global card_provider_list_number
-                    card_provider_list_number = i
-                    global card_number_digits
-                    card_number_digits = available_length[j]
-                    global result_found
-                    result_found = True
-                    
-#Major Industry Identifier (MII) identification method
-def mit_identifier():
-    global first_digit
-    global mit_name
-    switcher = { 
-         1: "Airlines",
-         2: "Airlines",
-         3: "Travel and Entertainment",
-         4: "Banking and Financial Services",
-         5: "Banking and Financial Services",
-         6: "Merchandising and Banking",
-         7: "Petroleum",
-         8: "Health care, Telecommunications",
-         9: "National Assignment"
-    }
-    mit_name=switcher.get(first_digit, "MIT Identifier Not Found") 
-
-#Luhn Algorithm or modulo-10 Algorithm
-def luhn_algorithm():
-    for i in range(card_number_length):
-        if(i%2!=0 and i!=0):
-            card_number_list_reverse[i]=int(card_number_list_reverse[i])*2
-            #print(str(i)+" "+ str(card_number_list_reverse[i]))
-            if(len(str(card_number_list_reverse[i]))==2):
-                even_number_2=list(str(card_number_list_reverse[i]))
-                card_number_list_reverse[i] = int(even_number_2[0])+int(even_number_2[1])
-                #print("\tsubsum "+str(i)+" "+str(card_number_list_reverse[i]))
-        else:
-            card_number_list_reverse[i]=int(card_number_list_reverse[i])
-    division_int = int(sum(card_number_list_reverse)/10)
-    division_float=sum(card_number_list_reverse)/10
-    if(division_int-division_float==0):
-        return True
-        
-#initial level number length validation
-def card_number_validation():
-    min_max_digits()
-    if(card_number_length>= min_digits and card_number_length <= max_digits and first_digit != 0):
-        iin_identifier()
-        mit_identifier()
-        if(result_found and luhn_algorithm()):
-            print("\nEntered Details are Correct\n")
-            print("\nHere are the some details we know about you card")
-            print("\nNo: "+card_number)
-            print("\nIssuing Network: "+name[card_provider_list_number])
-            print("\nType: "+c_d[card_provider_list_number]+" Card")
-            print("\nCategory of the entity which issued the Card: "+mit_name)
-        else:
-            print("\nCard Number is Invalid\nPlease renter the number!\n")
-    else:
-        print("\nCard Number is Invalid\n")
-
-#method called to run program
-card_number_validation()
